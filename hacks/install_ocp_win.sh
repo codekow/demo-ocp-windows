@@ -150,7 +150,6 @@ ocp_print_cmd() {
 }
 
 ocp_install_cmd() {
-  cd ..
   ${TMP_DIR}/bin/openshift-install create cluster --dir ${TMP_DIR}/${INSTALL_DIR}
   export KUBECONFIG=$(pwd)/${TMP_DIR}/${INSTALL_DIR}/auth/kubeconfig
 }
