@@ -1,0 +1,44 @@
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: win-info
+  name: win-info
+spec:
+  selector:
+    matchLabels:
+      app: win-info
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: win-info
+      name: win-info
+    spec:
+      nodeSelector:
+        kubernetes.io/os: windows
+      tolerations:
+      - key: "os"
+        value: "Windows"
+        Effect: "NoSchedule"
+      containers:
+      - name: win-info
+        # image: mcr.microsoft.com/windows/servercore:ltsc2019
+        # image: mcr.microsoft.com/windows/nanoserver:ltsc2022
+        image: mcr.microsoft.com/windows/servercore:ltsc2022
+        imagePullPolicy: IfNotPresent
+        command:
+        - powershell.exe
+        - -command
+        - |
+          Get-CimInstance -ClassName Win32_ComputerSystem
+          Get-CimInstance -ClassName Win32_LocalTime
+          Get-CimInstance -ClassName Win32_OperatingSystem |
+            Select-Object -Property BuildNumber,BuildType,OSType,ServicePackMajorVersion,ServicePackMinorVersion
+          
+          Get-CimInstance -ClassName Win32_LogicalDisk -Filter "DriveType=3"
+
+          Get-Process
+          Get-CimInstance -ClassName Win32_QuickFixEngineering
+          Write-Host('Waiting for the end...')
+          Start-Sleep -Seconds 3600

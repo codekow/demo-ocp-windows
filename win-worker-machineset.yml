@@ -1,0 +1,53 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  annotations:
+    machine.openshift.io/memoryMb: '32768'
+    machine.openshift.io/vCPU: '8'
+  name: win-worker
+  namespace: openshift-machine-api
+  labels:
+    machine.openshift.io/cluster-api-cluster: ocp4-win
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: ocp4-win
+      machine.openshift.io/cluster-api-machineset: win-worker
+  template:
+    metadata:
+      labels:
+        machine.openshift.io/cluster-api-cluster: ocp4-win
+        machine.openshift.io/cluster-api-machine-role: worker
+        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machineset: win-worker
+        machine.openshift.io/os-id: Windows
+    spec:
+      metadata:
+        labels:
+          node-role.kubernetes.io/worker: ''
+      providerSpec:
+        value:
+          apiVersion: machine.openshift.io/v1beta1
+          metadata:
+            creationTimestamp: null
+          credentialsSecret:
+            name: vsphere-cloud-credentials
+          numCoresPerSocket: 2
+          numCPUs: 8
+          diskGiB: 128
+          snapshot: ''
+          userDataSecret:
+            name: windows-user-data
+          memoryMiB: 32768
+          network:
+            devices:
+              - networkName: Workshops
+          kind: VSphereMachineProviderSpec
+          workspace:
+            datacenter: Central
+            datastore: SSD
+            folder: /Central/vm/Sandbox/ocp4.tigerlab.io
+            resourcePool: /Central/host/Tigers/Resources
+            server: 10.1.2.3
+          template: win2022

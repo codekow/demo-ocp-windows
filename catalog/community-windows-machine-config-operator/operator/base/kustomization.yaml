@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - community-windows-machine-config-operator.yaml
+  - openshift-windows-machine-config-operator-ns.yaml
+  - openshift-windows-machine-config-operator-og.yaml
+

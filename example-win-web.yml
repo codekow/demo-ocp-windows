@@ -1,0 +1,98 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: win-webserver
+  name: win-webserver
+spec:
+  selector:
+    matchLabels:
+      app: win-webserver
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: win-webserver
+      name: win-webserver
+    spec:
+      nodeSelector:
+        kubernetes.io/os: windows
+      tolerations:
+      - key: "os"
+        value: "Windows"
+        Effect: "NoSchedule"
+      containers:
+      - name: win-web
+        # image: mcr.microsoft.com/windows/servercore:ltsc2019
+        # image: mcr.microsoft.com/windows/nanoserver:ltsc2022
+        image: mcr.microsoft.com/windows/servercore:ltsc2022
+        imagePullPolicy: IfNotPresent
+        command:
+        - powershell.exe
+        - -command
+        - |
+          $listener = New-Object System.Net.HttpListener
+          $listener.Prefixes.Add('http://*:8080/')
+          $listener.Start()
+          
+          Write-Host('Listening at http://*:8080/')
+          
+          while ($listener.IsListening) { 
+            $context = $listener.GetContext()
+            $response = $context.Response
+            $content='
+              <html><body>
+                <div align=center>
+                <H1>Windows Container Web Server</H1>
+                <H2>Do you really know why you want to run containers on Windows?</H2>
+                <i>For simplicity, compatability, and portability you might still want virtualization for windows apps.</i>
+                
+                <H2>Did you mean...</H2>
+                
+                <li><a href=https://www.redhat.com/en/technologies/cloud-computing/openshift/virtualization>OpenShift Virtualization</a>
+                <li><a href=https://kubevirt.io/>Kube-Virt</a>
+                <li><a href=https://stackoverflow.com/questions/499858/benefits-of-choosing-windows-over-unix-as-development-platform>Linux vs Windows for Development</a>
+
+                </div>
+              </body></html>'
+            
+            $buffer = [System.Text.Encoding]::UTF8.GetBytes($content)
+            $response.ContentLength64 = $buffer.Length
+            $response.OutputStream.Write($buffer, 0, $buffer.Length)
+            $response.Close()
+          }
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: win-webserver
+  labels:
+    app: win-webserver
+spec:
+  ports:
+    # the port that this service should serve on
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: win-webserver
+  type: LoadBalancer
+---
+kind: Route 
+apiVersion: route.openshift.io/v1
+metadata:
+  name: win-webserver
+  labels:
+    app: win-webserver
+    app.kubernetes.io/component: win-webserver
+    app.kubernetes.io/instance: win-webserver
+    app.kubernetes.io/part-of: win-webserver
+    app.openshift.io/runtime-version: latest
+spec:
+  to:
+    kind: Service
+    name: win-webserver
+    weight: 100
+  port:
+    targetPort: 8080
+  wildcardPolicy: None
