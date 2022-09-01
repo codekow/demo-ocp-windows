@@ -125,4 +125,5 @@ Windows Machine Config Operator (WMCO)
 - [WMCO 4.10 - vSphere Windows Golden Image](https://github.com/openshift/windows-machine-config-operator/blob/community-4.10/docs/vsphere-golden-image.md)
 
 Windows Images
+- [Windows 2022 ISO](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022)
 - [Base Images - Windows](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/container-base-images)
