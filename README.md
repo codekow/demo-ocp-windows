@@ -69,7 +69,7 @@ Example Service Account: `OCPInstaller`
 
 ![Folder Tree Example](docs/folder-permissions.png)
 
-## Machine Set - Windows
+## Golden Image / Machine Set - Windows
 
 - Golden Image `unattend.xml`: [example-unattend.xml](example-unattend.xml)
 - OCP MachineSet: [win-worker-machineset.yml](win-worker-machineset.yml)
@@ -105,7 +105,7 @@ spec:
           template: win2022
 ```
 
-## Sample Windows Apps
+## Sample Apps - Windows
 
 - Basic Web App: [example-win-web.yml](example-win-web.yml)
 - Win Daemon Set: [example-win-daemonset.yml](example-win-daemonset.yml)
@@ -113,15 +113,16 @@ spec:
 ## Links
 
 OpenShift Docs
-- [OpenShift 4.10 OVN Hybrid Networking](https://docs.openshift.com/container-platform/4.10/networking/ovn_kubernetes_network_provider/configuring-hybrid-networking.html)
 - [vCenter Account Priviledges](https://docs.openshift.com/container-platform/4.10/installing/installing_vsphere/installing-vsphere-installer-provisioned.html#installation-vsphere-installer-infra-requirements_installing-vsphere-installer-provisioned)
+- [OpenShift 4.10 - OVN Hybrid Networking](https://docs.openshift.com/container-platform/4.10/networking/ovn_kubernetes_network_provider/configuring-hybrid-networking.html)
+- [OpenShift 4.10 - Windows MachineSet](https://docs.openshift.com/container-platform/4.10/windows_containers/creating_windows_machinesets/creating-windows-machineset-vsphere.html)
+
+
 
 Windows Machine Config Operator (WMCO)
-- https://github.com/openshift/windows-machine-config-operator/blob/community-4.10/docs/setup-hybrid-OVNKubernetes-cluster.md
-- https://github.com/openshift/windows-machine-config-operator/blob/community-4.10/README.md#configuring-byoh-bring-your-own-host-windows-instances
-- https://github.com/openshift/windows-machine-config-operator/tree/community-4.10
-- https://docs.openshift.com/container-platform/4.10/networking/ovn_kubernetes_network_provider/configuring-hybrid-networking.html
-- https://docs.openshift.com/container-platform/4.10/windows_containers/creating_windows_machinesets/creating-windows-machineset-vsphere.html
+- [WMCO 4.10](https://github.com/openshift/windows-machine-config-operator/tree/community-4.10)
+- [WMCO 4.10 - OVN Hybrid Networking](https://github.com/openshift/windows-machine-config-operator/blob/community-4.10/docs/setup-hybrid-OVNKubernetes-cluster.md)
+- [WMCO 4.10 - vSphere Windows Golden Image](https://github.com/openshift/windows-machine-config-operator/blob/community-4.10/docs/vsphere-golden-image.md)
 
 Windows Images
 - [Base Images - Windows](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/container-base-images)
