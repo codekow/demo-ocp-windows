@@ -44,13 +44,12 @@ spec:
               <html><body>
                 <div align=center>
                 <H1>Windows Container Web Server</H1>
-                <H2>Do you really know why you want to run containers on Windows?</H2>
-                <i>For simplicity, compatability, and portability you might still want virtualization for windows apps.</i>
+                <H2>Do you know what it takes to put your app in containers on Windows (cost, time)?</H2>
+                <i>For simplicity, compatability, security, and portability you might want virtualization for windows apps.</i>
                 
                 <H2>Did you mean...</H2>
                 
-                <li><a href=https://www.redhat.com/en/technologies/cloud-computing/openshift/virtualization>OpenShift Virtualization</a>
-                <li><a href=https://kubevirt.io/>Kube-Virt</a>
+                <li><a href=https://www.redhat.com/en/technologies/cloud-computing/openshift/virtualization>OpenShift Virtualization</a> / <a href=https://kubevirt.io/>Kube-Virt</a>
                 <li><a href=https://stackoverflow.com/questions/499858/benefits-of-choosing-windows-over-unix-as-development-platform>Linux vs Windows for Development</a>
 
                 </div>
