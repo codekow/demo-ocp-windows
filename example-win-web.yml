@@ -44,7 +44,7 @@ spec:
               <html><body>
                 <div align=center>
                 <H1>Windows Container Web Server</H1>
-                <H2>Do you know what it takes to put your app in containers on Windows (cost, time)?</H2>
+                <H2>Do you know what it takes to put your app in containers on Windows?</H2>
                 <i>For simplicity, compatability, security, and portability you might want virtualization for windows apps.</i>
                 
                 <H2>Did you mean...</H2>
